@@ -1,7 +1,21 @@
-<div *ngIf="!letters.length" class="container">
-    <h1>No letters</h1>
-    <button type="button" class="btn btn-primary" (click)="isModalOpen = true">Create new letter</button>
+<div class="container mt-5">
+    <ng-container *ngIf="!letters.length">
+        <h1>No letters</h1>
+        <button type="button" class="btn btn-primary" (click)="isModalOpen = true">Create new letter</button>
+    </ng-container>
+    <div *ngIf="letters.length" class="container mt-5">
+        <h1>Letters</h1>
+        <ul class="list-group">
+            <li *ngFor="let item of letters" class="list-group-item">
+                <!-- {{ item.id }} -->
+                {{ item.name }}
+                <!-- {{ item.profession }}
+                {{ item.about }} -->
+            </li>
+        </ul>
+    </div>
 </div>
+
 
 <div *ngIf="isModalOpen" class="modal modal-show" tabindex="-1" aria-modal="true" role="dialog">
     <div class="modal-dialog show-modal-dialog">
@@ -76,8 +90,10 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="isModalOpen = false">Close</button>
-                <button type="button" class="btn btn-primary" [disabled]="!letterForm.valid" (click)="isModalOpen = false">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                    (click)="isModalOpen = false">Close</button>
+                <button type="button" class="btn btn-primary" [disabled]="!letterForm.valid" (click)="saveLetter()">Save
+                    changes</button>
             </div>
         </div>
     </div>

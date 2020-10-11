@@ -38,6 +38,8 @@ export class CoverLetterComponent implements OnInit {
       about: this.about.value,
     };
     this.coverLetterService.addLetter(letter);
+    this.isModalOpen = false;
+    console.log(this.letters)
   }
 
   private setrandomID(): string {
