@@ -3,7 +3,7 @@
         <h1>No letters</h1>
     </ng-container>
     <div *ngIf="letters.length" class="container mt-5">
-        <h1>Letters</h1>
+        <h1 class="mb-5">Letters</h1>
         <ul class="list-group">
             <li *ngFor="let letter of letters; index as i" [class.d-flex]="!letter.isOpen"
                 [class.list-group-item-open]="letter.isOpen" class="list-group-item justify-content-between">
