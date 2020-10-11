@@ -6,25 +6,30 @@
     <form [formGroup]="letterForm">
         <div class="form-group">
             <label for="letterFormID">ID</label>
-            <input type="email" class="form-control" id="letterFormID">
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            <input type="email" class="form-control" id="letterFormID" formControlName="id">
         </div>
         <div class="form-group">
             <label for="letterFormProfession">Profession</label>
-            <input type="password" class="form-control" id="letterFormProfession">
+            <input type="password" class="form-control" id="letterFormProfession" formControlName="profession">
+            <small *ngIf="!profession.valid &&  (profession.dirty || profession.touched)"
+                class="form-text text-muted form-error-msg">We'll never share your email with anyone else.</small>
         </div>
         <div class="form-group">
             <label for="letterFormName">Name</label>
-            <input type="password" class="form-control" id="letterFormName">
+            <input type="password" class="form-control" id="letterFormName" formControlName="name">
+            <small *ngIf="!name.valid &&  (name.dirty || name.touched)"
+                class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
         <div class="form-group">
             <label for="letterFormAbout">About</label>
-            <textarea class="form-control" id="letterFormAbout" rows="3"></textarea>
-          </div>
+            <textarea class="form-control" id="letterFormAbout" rows="3" formControlName="about"></textarea>
+            <small *ngIf="!about.valid &&  (about.dirty || about.touched)"
+                class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
         <!-- <div class="form-group form-check">
             <input type="checkbox" class="form-check-input" id="exampleCheck1">
             <label class="form-check-label" for="exampleCheck1">Check me out</label>
         </div> -->
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!letterForm.valid">Submit</button>
     </form>
 </div>
