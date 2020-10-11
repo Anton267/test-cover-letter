@@ -8,6 +8,9 @@
     color: var(--danger) !important
     opacity: 0
 
+.unique-id-message
+    color: var(--danger)
+
 .show-error
     animation: show-error .2s .2s cubic-bezier(0.550, 0.085, 0.680, 0.530) both
 
@@ -31,6 +34,22 @@
     left: 0
     right: 0
 
+.list-group-item
+    max-height: 66px
+    transition: all 1s ease-out
+    overflow: hidden
+
+.list-group-item-open
+    max-height: 1000px
+    height: auto
+
+.letter-collapse
+    .card
+        border: none !important
+
+.form-check-input
+    transform: scale(1.5)
+    
 @keyframes show-error
     0%
         opacity: 0
