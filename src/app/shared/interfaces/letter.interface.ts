@@ -3,5 +3,5 @@ export interface Letter {
     profession: string;
     name: string;
     about: string;
-    draft: boolean;
+    draft?: boolean;
 }
