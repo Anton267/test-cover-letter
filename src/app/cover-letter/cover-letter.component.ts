@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Letter } from '../shared/interfaces/letter.interface';
 import { CoverLetterService } from '../shared/services/cover-letter.service';
@@ -8,7 +8,7 @@ import { CoverLetterService } from '../shared/services/cover-letter.service';
   templateUrl: './cover-letter.component.html',
   styleUrls: ['./cover-letter.component.sass']
 })
-export class CoverLetterComponent implements OnInit {
+export class CoverLetterComponent {
 
   public letterForm: FormGroup;
   public letters = this.coverLetterService.letters;
@@ -23,9 +23,6 @@ export class CoverLetterComponent implements OnInit {
     private fb: FormBuilder,
   ) {
     this.createForm();
-  }
-
-  ngOnInit(): void {
   }
 
   public newLetter(): void {
