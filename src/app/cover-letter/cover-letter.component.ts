@@ -16,7 +16,7 @@ export class CoverLetterComponent implements OnInit {
     private fb: FormBuilder,
   ) {
     this.letterForm = this.fb.group({
-      id: [this.setrandomID()],
+      id: [{ value: this.setrandomID(), disabled: true }],
       profession: ['', [Validators.minLength(3), Validators.required]],
       name: ['', [Validators.minLength(3), Validators.required]],
       about: ['', [Validators.minLength(3), Validators.required]],
