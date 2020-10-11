@@ -1,62 +1,84 @@
-<div class="container">
+<div *ngIf="!letters.length" class="container">
     <h1>No letters</h1>
-    <button type="button" class="btn btn-primary">Create new letter</button>
+    <button type="button" class="btn btn-primary" (click)="isModalOpen = true">Create new letter</button>
 </div>
-<div class="container">
-    <form [formGroup]="letterForm">
-        <div class="form-item-wrapper mb-4">
-            <label for="letterFormID">ID</label>
-            <input type="text" class="form-control" id="letterFormID" formControlName="id">
-        </div>
-        <div class="form-item-wrapper mb-4">
-            <label for="letterFormProfession">Profession</label>
-            <input type="text" class="form-control" id="letterFormProfession" formControlName="profession">
-            <div *ngIf="!profession.valid && (profession.dirty || profession.touched)"
-                [class.show-error]="!profession.valid && (profession.dirty || profession.touched)">
-                <small [class.show-error]="profession.errors?.required && !profession.errors?.minlength"
-                    [class.hide-error]="!profession.errors?.required" class="form-text form-error-msg">Profession is
-                    required</small>
-                <small [class.show-error]="profession.errors?.minlength"
-                    [class.hide-error]="!profession.errors?.minlength" class="form-text form-error-msg">Minimum is 3
-                    letters</small>
-                <small [class.show-error]="profession.errors?.pattern && !profession.errors?.minlength"
-                    [class.hide-error]="!profession.errors?.pattern" class="form-text form-error-msg">Profession can has
-                    only letters</small>
+
+<div *ngIf="isModalOpen" class="modal modal-show" tabindex="-1" aria-modal="true" role="dialog">
+    <div class="modal-dialog show-modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="letterForm">
+                    <div class="form-item-wrapper mb-4">
+                        <label for="letterFormID">ID</label>
+                        <input type="text" class="form-control" id="letterFormID" formControlName="id">
+                    </div>
+                    <div class="form-item-wrapper mb-4">
+                        <label for="letterFormProfession">Profession</label>
+                        <input type="text" class="form-control" id="letterFormProfession" formControlName="profession">
+                        <div *ngIf="!profession.valid && (profession.dirty || profession.touched)"
+                            [class.show-error]="!profession.valid && (profession.dirty || profession.touched)">
+                            <small [class.show-error]="profession.errors?.required && !profession.errors?.minlength"
+                                [class.hide-error]="!profession.errors?.required"
+                                class="form-text form-error-msg">Profession is
+                                required</small>
+                            <small [class.show-error]="profession.errors?.minlength"
+                                [class.hide-error]="!profession.errors?.minlength"
+                                class="form-text form-error-msg">Minimum is 3
+                                letters</small>
+                            <small [class.show-error]="profession.errors?.pattern && !profession.errors?.minlength"
+                                [class.hide-error]="!profession.errors?.pattern"
+                                class="form-text form-error-msg">Profession can has
+                                only letters</small>
+                        </div>
+                    </div>
+                    <div class="form-item-wrapper mb-4">
+                        <label for="letterFormName">Name</label>
+                        <input type="text" class="form-control" id="letterFormName" formControlName="name">
+                        <div *ngIf="!name.valid && (name.dirty || name.touched)"
+                            [class.show-error]="!name.valid && (name.dirty || name.touched)">
+                            <small [class.show-error]="name.errors?.required && !name.errors?.minlength"
+                                [class.hide-error]="!name.errors?.required" class="form-text form-error-msg">Name is
+                                required</small>
+                            <small [class.show-error]="name.errors?.minlength"
+                                [class.hide-error]="!name.errors?.minlength" class="form-text form-error-msg">Minimum is
+                                3
+                                letters</small>
+                            <small [class.show-error]="name.errors?.pattern && !name.errors?.minlength"
+                                [class.hide-error]="!name.errors?.pattern" class="form-text form-error-msg">Name can has
+                                only letters</small>
+                        </div>
+                    </div>
+                    <div class="form-item-wrapper mb-5">
+                        <label for="letterFormAbout">About</label>
+                        <textarea class="form-control" id="letterFormAbout" rows="3" formControlName="about"></textarea>
+                        <div *ngIf="!about.valid && (about.dirty || about.touched)"
+                            [class.show-error]="!about.valid && (about.dirty || about.touched)">
+                            <small [class.show-error]="about.errors?.required && !about.errors?.minlength"
+                                [class.hide-error]="!about.errors?.required" class="form-text form-error-msg">About is
+                                required</small>
+                            <small [class.show-error]="about.errors?.minlength"
+                                [class.hide-error]="!about.errors?.minlength" class="form-text form-error-msg">Minimum
+                                is 3
+                                letters</small>
+                        </div>
+                    </div>
+                    <!-- <div class="form-item-wrapper form-check">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    </div> -->
+                    <!-- <button type="submit" class="btn btn-primary" [disabled]="!letterForm.valid">Submit</button> -->
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="isModalOpen = false">Close</button>
+                <button type="button" class="btn btn-primary" [disabled]="!letterForm.valid" (click)="isModalOpen = false">Save changes</button>
             </div>
         </div>
-        <div class="form-item-wrapper mb-4">
-            <label for="letterFormName">Name</label>
-            <input type="text" class="form-control" id="letterFormName" formControlName="name">
-            <div *ngIf="!name.valid && (name.dirty || name.touched)"
-                [class.show-error]="!name.valid && (name.dirty || name.touched)">
-                <small [class.show-error]="name.errors?.required && !name.errors?.minlength"
-                    [class.hide-error]="!name.errors?.required" class="form-text form-error-msg">Name is
-                    required</small>
-                <small [class.show-error]="name.errors?.minlength" [class.hide-error]="!name.errors?.minlength"
-                    class="form-text form-error-msg">Minimum is 3
-                    letters</small>
-                <small [class.show-error]="name.errors?.pattern && !name.errors?.minlength"
-                    [class.hide-error]="!name.errors?.pattern" class="form-text form-error-msg">Name can has
-                    only letters</small>
-            </div>
-        </div>
-        <div class="form-item-wrapper mb-5">
-            <label for="letterFormAbout">About</label>
-            <textarea class="form-control" id="letterFormAbout" rows="3" formControlName="about"></textarea>
-            <div *ngIf="!about.valid && (about.dirty || about.touched)"
-                [class.show-error]="!about.valid && (about.dirty || about.touched)">
-                <small [class.show-error]="about.errors?.required && !about.errors?.minlength"
-                    [class.hide-error]="!about.errors?.required" class="form-text form-error-msg">About is
-                    required</small>
-                <small [class.show-error]="about.errors?.minlength" [class.hide-error]="!about.errors?.minlength"
-                    class="form-text form-error-msg">Minimum is 3
-                    letters</small>
-            </div>
-        </div>
-        <!-- <div class="form-item-wrapper form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1">Check me out</label>
-        </div> -->
-        <button type="submit" class="btn btn-primary" [disabled]="!letterForm.valid">Submit</button>
-    </form>
+    </div>
 </div>

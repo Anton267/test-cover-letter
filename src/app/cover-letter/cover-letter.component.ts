@@ -11,6 +11,9 @@ export class CoverLetterComponent implements OnInit {
 
   letterForm: FormGroup;
 
+  public letters = this.coverLetterService.letters;
+  public isModalOpen = false;
+
   constructor(
     public coverLetterService: CoverLetterService,
     private fb: FormBuilder,

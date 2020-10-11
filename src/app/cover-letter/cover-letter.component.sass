@@ -14,6 +14,23 @@
 .hide-error
     animation: hide-error .2s cubic-bezier(0.550, 0.085, 0.680, 0.530) both
 
+.modal-show
+    display: block
+    animation: modal-show .2s cubic-bezier(0.550, 0.085, 0.680, 0.530) both
+
+.show-modal-dialog
+    animation: show-modal-dialog .2s cubic-bezier(0.550, 0.085, 0.680, 0.530) both
+
+.modal-show::before
+    content: ""
+    background-color: #000
+    opacity: 0.5
+    position: absolute
+    top: 0
+    bottom: 0
+    left: 0
+    right: 0
+
 @keyframes show-error
     0%
         opacity: 0
@@ -29,3 +46,15 @@
     100%
         opacity: 0
         transform: translateY(20%)
+
+@keyframes modal-show
+    0%
+        opacity: 0
+    100%
+        opacity: 1
+
+@keyframes show-modal-dialog
+    0%
+        transform: translateY(-20%)
+    100%
+        transform: translateY(0)
