@@ -46,15 +46,16 @@
                             <span *ngIf="notUniqueId" class="unique-id-message show-error">&nbsp;ID should be
                                 unique</span>
                         </div>
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="letterFormID" formControlName="id" #id>
-                            <div *ngIf="!id.valid && (id.dirty || id.touched)"
-                                [class.show-error]="!id.valid && (id.dirty || id.touched)">
-                                <small [class.show-error]="id.errors?.required && !id.errors?.minlength"
-                                    [class.hide-error]="!id.errors?.required" class="form-text form-error-msg">
-                                    ID is required</small>
+                        <div class="form-id-wrapper">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="letterFormID" formControlName="id" #idInp>
+                                <button type="button" class="btn btn-info" (click)="generateRandomId()">Random
+                                    Id</button>
                             </div>
-                            <button type="button" class="btn btn-info" (click)="generateRandomId()">Random Id</button>
+                            <small *ngIf="!id.valid && (id.dirty || id.touched) && id.errors?.required"
+                                [class.show-error]="id.errors?.required" [class.hide-error]="!id.errors?.required"
+                                class="form-text form-error-msg">
+                                ID is required</small>
                         </div>
                     </div>
                     <div class="form-item-wrapper mb-4">

@@ -16,7 +16,7 @@ export class CoverLetterComponent {
   public notUniqueId = false;
   private isEdit = false;
   private saveEditableIndex: number;
-  @ViewChild('id', { static: false }) private idElem: ElementRef<HTMLInputElement>;
+  @ViewChild('idInp', { static: false }) private idElem: ElementRef<HTMLInputElement>;
 
   constructor(
     public coverLetterService: CoverLetterService,
