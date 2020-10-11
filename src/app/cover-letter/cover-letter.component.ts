@@ -48,13 +48,17 @@ export class CoverLetterComponent {
 
   public saveLetter(): void {
     const letter: Letter = {
-      id: this.id.value,
-      profession: this.profession.value,
-      name: this.name.value,
-      about: this.about.value,
+      id: this.id.value.toString().trim(),
+      profession: this.profession.value.toString().trim(),
+      name: this.name.value.toString().trim(),
+      about: this.about.value.toString().trim(),
       isOpen: this.isOpen.value,
       draft: this.draft.value,
     };
+    this.letterForm.setValue(letter);
+    if (this.letterForm.invalid) {
+      return;
+    }
     const unique = this.letters.findIndex((el: Letter) => el.id === letter.id);
     if (unique === -1 || this.saveEditableIndex === unique) {
       this.isEdit ? this.coverLetterService.editLetter(letter) : this.coverLetterService.addLetter(letter);
@@ -70,7 +74,7 @@ export class CoverLetterComponent {
     e.stopPropagation();
     this.isEdit = true;
     this.letterForm.patchValue({ id: letter.id });
-    this.letterForm.patchValue({ profession: letter.profession });
+    this.letterForm.patchValue({ profession: letter });
     this.letterForm.patchValue({ name: letter.name });
     this.letterForm.patchValue({ about: letter.about });
     this.letterForm.patchValue({ isOpen: letter.isOpen });
