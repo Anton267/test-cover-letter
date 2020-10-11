@@ -40,4 +40,8 @@ export class CoverLetterComponent {
     this.saveEditableIndex = i;
   }
 
+  public removeLetter(letter: Letter): void {
+    this.coverLetterService.removeLetter(letter);
+  }
+
 }

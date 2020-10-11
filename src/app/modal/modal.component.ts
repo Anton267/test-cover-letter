@@ -14,7 +14,7 @@ export class ModalComponent implements OnInit {
   @Input() private isEdit: boolean;
   @Input() private saveEditableIndex: number;
   @Input() private letter: Letter;
-  @Output() closeEvent: EventEmitter<any> = new EventEmitter();
+  @Output() public closeEvent: EventEmitter<any> = new EventEmitter();
   @ViewChild('idInp', { static: false }) private idElem: ElementRef<HTMLInputElement>;
   public notUniqueId: boolean;
   public letterForm: FormGroup;
@@ -47,10 +47,11 @@ export class ModalComponent implements OnInit {
       isOpen: this.isOpen.value,
       draft: this.draft.value,
     };
-    this.letterForm.setValue(letter);
-    if (this.letterForm.invalid) {
+
+    if (!this.checkIfFormValid(letter)) {
       return;
     }
+
     const unique = this.letters.findIndex((el: Letter) => el.id === letter.id);
     if (unique === -1 || this.saveEditableIndex === unique) {
       this.isEdit ? this.coverLetterService.editLetter(letter) : this.coverLetterService.addLetter(letter);
@@ -62,12 +63,16 @@ export class ModalComponent implements OnInit {
     }
   }
 
-  public close(): void {
-    this.closeEvent.emit();
+  private checkIfFormValid(letter: Letter): boolean {
+    this.letterForm.setValue(letter);
+    if (this.letterForm.invalid) {
+      return false;
+    }
+    return true;
   }
 
-  public removeLetter(letter: Letter): void {
-    this.coverLetterService.removeLetter(letter);
+  public close(): void {
+    this.closeEvent.emit();
   }
 
   public generateRandomId(): void {
