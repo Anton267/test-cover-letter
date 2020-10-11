@@ -4,29 +4,56 @@
 </div>
 <div class="container">
     <form [formGroup]="letterForm">
-        <div class="form-group">
+        <div class="form-item-wrapper mb-4">
             <label for="letterFormID">ID</label>
-            <input type="email" class="form-control" id="letterFormID" formControlName="id">
+            <input type="text" class="form-control" id="letterFormID" formControlName="id">
         </div>
-        <div class="form-group">
+        <div class="form-item-wrapper mb-4">
             <label for="letterFormProfession">Profession</label>
-            <input type="password" class="form-control" id="letterFormProfession" formControlName="profession">
-            <small *ngIf="!profession.valid &&  (profession.dirty || profession.touched)"
-                class="form-text text-muted form-error-msg">We'll never share your email with anyone else.</small>
+            <input type="text" class="form-control" id="letterFormProfession" formControlName="profession">
+            <div *ngIf="!profession.valid && (profession.dirty || profession.touched)"
+                [class.show-error]="!profession.valid && (profession.dirty || profession.touched)">
+                <small [class.show-error]="profession.errors?.required && !profession.errors?.minlength"
+                    [class.hide-error]="!profession.errors?.required" class="form-text form-error-msg">Profession is
+                    required</small>
+                <small [class.show-error]="profession.errors?.minlength"
+                    [class.hide-error]="!profession.errors?.minlength" class="form-text form-error-msg">Minimum is 3
+                    letters</small>
+                <small [class.show-error]="profession.errors?.pattern && !profession.errors?.minlength"
+                    [class.hide-error]="!profession.errors?.pattern" class="form-text form-error-msg">Profession can has
+                    only letters</small>
+            </div>
         </div>
-        <div class="form-group">
+        <div class="form-item-wrapper mb-4">
             <label for="letterFormName">Name</label>
-            <input type="password" class="form-control" id="letterFormName" formControlName="name">
-            <small *ngIf="!name.valid &&  (name.dirty || name.touched)"
-                class="form-text text-muted">We'll never share your email with anyone else.</small>
+            <input type="text" class="form-control" id="letterFormName" formControlName="name">
+            <div *ngIf="!name.valid && (name.dirty || name.touched)"
+                [class.show-error]="!name.valid && (name.dirty || name.touched)">
+                <small [class.show-error]="name.errors?.required && !name.errors?.minlength"
+                    [class.hide-error]="!name.errors?.required" class="form-text form-error-msg">Name is
+                    required</small>
+                <small [class.show-error]="name.errors?.minlength" [class.hide-error]="!name.errors?.minlength"
+                    class="form-text form-error-msg">Minimum is 3
+                    letters</small>
+                <small [class.show-error]="name.errors?.pattern && !name.errors?.minlength"
+                    [class.hide-error]="!name.errors?.pattern" class="form-text form-error-msg">Name can has
+                    only letters</small>
+            </div>
         </div>
-        <div class="form-group">
+        <div class="form-item-wrapper mb-5">
             <label for="letterFormAbout">About</label>
             <textarea class="form-control" id="letterFormAbout" rows="3" formControlName="about"></textarea>
-            <small *ngIf="!about.valid &&  (about.dirty || about.touched)"
-                class="form-text text-muted">We'll never share your email with anyone else.</small>
+            <div *ngIf="!about.valid && (about.dirty || about.touched)"
+                [class.show-error]="!about.valid && (about.dirty || about.touched)">
+                <small [class.show-error]="about.errors?.required && !about.errors?.minlength"
+                    [class.hide-error]="!about.errors?.required" class="form-text form-error-msg">About is
+                    required</small>
+                <small [class.show-error]="about.errors?.minlength" [class.hide-error]="!about.errors?.minlength"
+                    class="form-text form-error-msg">Minimum is 3
+                    letters</small>
+            </div>
         </div>
-        <!-- <div class="form-group form-check">
+        <!-- <div class="form-item-wrapper form-check">
             <input type="checkbox" class="form-check-input" id="exampleCheck1">
             <label class="form-check-label" for="exampleCheck1">Check me out</label>
         </div> -->
