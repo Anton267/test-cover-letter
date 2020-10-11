@@ -1,5 +1,5 @@
 export interface Letter {
-    id: number;
+    id: number | string;
     profession: string;
     name: string;
     about: string;
