@@ -8,8 +8,6 @@ export class CoverLetterService {
 
   public letters: Letter[] = [];
 
-  constructor() { }
-
   public addLetter(letter: Letter): void {
     this.letters.push(letter);
   }
