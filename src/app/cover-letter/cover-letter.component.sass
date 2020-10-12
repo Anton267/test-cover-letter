@@ -3,6 +3,7 @@
     max-height: 66px
     transition: all 1s ease-out
     overflow: hidden
+    animation: letters-fade-in .2s cubic-bezier(0.550, 0.085, 0.680, 0.530)
 
 .list-group-item-open
     max-height: 1000px
@@ -11,3 +12,21 @@
 .letter-collapse
     .card
         border: none !important
+
+.letters-fade-in
+    animation: letters-fade-in .2s cubic-bezier(0.550, 0.085, 0.680, 0.530)
+
+.letters-fade-out
+    animation: letters-fade-out .2s cubic-bezier(0.550, 0.085, 0.680, 0.530) both
+
+@keyframes letters-fade-in
+    0%
+        opacity: 0
+    100%
+        opacity: 1
+
+@keyframes letters-fade-out
+    0%
+        opacity: 1
+    100%
+        opacity: 0

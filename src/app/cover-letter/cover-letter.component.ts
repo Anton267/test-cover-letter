@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { Letter } from '../shared/interfaces/letter.interface';
 import { CoverLetterService } from '../shared/services/cover-letter.service';
 
@@ -40,8 +40,11 @@ export class CoverLetterComponent {
     this.saveEditableIndex = i;
   }
 
-  public removeLetter(letter: Letter): void {
-    this.coverLetterService.removeLetter(letter);
+  public removeLetter(letter: Letter, e: HTMLDivElement): void {
+    e.classList.add('letters-fade-out');
+    setTimeout(() => {
+      this.coverLetterService.removeLetter(letter);
+    }, 200);
   }
 
 }

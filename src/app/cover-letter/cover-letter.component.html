@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<div class="container mt-5" [class.letters-fade-in]="!letters.length">
     <ng-container *ngIf="!letters.length">
         <h1>No letters</h1>
     </ng-container>
@@ -6,7 +6,7 @@
         <h1 class="mb-5">Letters</h1>
         <ul class="list-group">
             <li *ngFor="let letter of letters; index as i" [class.d-flex]="!letter.isOpen"
-                [class.list-group-item-open]="letter.isOpen" class="list-group-item justify-content-between">
+                [class.list-group-item-open]="letter.isOpen" class="list-group-item justify-content-between" #liItem>
                 Name: {{ letter.name }}
                 <div class="collapse letter-collapse" [class.show]="letter.isOpen">
                     <div class="card card-body">
@@ -16,9 +16,9 @@
                         <p>Draft : {{ letter.draft }}</p>
                     </div>
                     <div class="d-flex justify-content-end">
-                        <button type="button" class="btn btn-dark mr-3" (click)="letter.isOpen = !letter.isOpen">Close
+                        <button type="button" class="btn btn-secondary mr-3" (click)="letter.isOpen = !letter.isOpen">Close
                             Details</button>
-                        <button type="button" class="btn btn-warning"
+                        <button type="button" class="btn btn-primary"
                             (click)="editLetter(letter, i, $event)">Edit</button>
                     </div>
                 </div>
@@ -26,7 +26,7 @@
                     <button *ngIf="!letter.isOpen" type="button" class="btn btn-info mr-3"
                         (click)="letter.isOpen = !letter.isOpen">View Details</button>
                     <button *ngIf="!letter.isOpen" type="button" class="btn btn-danger"
-                        (click)="removeLetter(letter)">Delete</button>
+                        (click)="removeLetter(letter, liItem)">Delete</button>
                 </div>
             </li>
         </ul>
