@@ -47,11 +47,9 @@ export class ModalComponent implements OnInit {
       isOpen: this.isOpen.value,
       draft: this.draft.value,
     };
-
     if (!this.checkIfFormValid(letter)) {
       return;
     }
-
     const unique = this.letters.findIndex((el: Letter) => el.id === letter.id);
     if (unique === -1 || this.saveEditableIndex === unique) {
       this.isEdit ? this.coverLetterService.editLetter(letter) : this.coverLetterService.addLetter(letter);
