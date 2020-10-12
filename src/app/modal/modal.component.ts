@@ -1,5 +1,5 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Letter } from '../shared/interfaces/letter.interface';
 import { CoverLetterService } from '../shared/services/cover-letter.service';
 
@@ -36,7 +36,9 @@ export class ModalComponent implements OnInit {
   public changeLetterDraft(): void {
     this.draft.value ? this.letterForm.patchValue({ draft: false }) : this.letterForm.patchValue({ draft: true });
     this.draft.value ? this.id.disable() : this.id.enable();
-    this.notUniqueId = !this.draft.value;
+    if (this.id.invalid) {
+      this.notUniqueId = true;
+    }
   }
 
   public saveLetter(): void {
