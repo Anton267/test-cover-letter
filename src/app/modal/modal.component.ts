@@ -36,11 +36,12 @@ export class ModalComponent implements OnInit {
   public changeLetterDraft(): void {
     this.draft.value ? this.letterForm.patchValue({ draft: false }) : this.letterForm.patchValue({ draft: true });
     this.draft.value ? this.id.disable() : this.id.enable();
+    this.notUniqueId = !this.draft.value;
   }
 
   public saveLetter(): void {
     const letter: Letter = {
-      id: this.id.value.toString().trim(),
+      id: this.id.value ? this.id.value.toString().trim() : null,
       profession: this.profession.value.toString().trim(),
       name: this.name.value.toString().trim(),
       about: this.about.value.toString().trim(),
@@ -51,7 +52,7 @@ export class ModalComponent implements OnInit {
       return;
     }
     const unique = this.letters.findIndex((el: Letter) => el.id === letter.id);
-    if (unique === -1 || this.saveEditableIndex === unique) {
+    if (unique === -1 || this.saveEditableIndex === unique || letter.id === null) {
       this.isEdit ? this.coverLetterService.editLetter(letter) : this.coverLetterService.addLetter(letter);
       this.close();
     } else {
