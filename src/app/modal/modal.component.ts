@@ -37,7 +37,7 @@ export class ModalComponent implements OnInit {
     this.draft.value ? this.letterForm.patchValue({ draft: false }) : this.letterForm.patchValue({ draft: true });
     this.draft.value ? this.id.disable() : this.id.enable();
     if (this.id.invalid) {
-      this.notUniqueId = true;
+      this.notUniqueId = this.draft.value;
     }
   }
 
