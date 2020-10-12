@@ -13,12 +13,16 @@ export class CoverLetterService {
   }
 
   public removeLetter(letter: Letter): void {
-    const index = this.letters.findIndex((el: Letter) => el.id ===  letter.id);
+    const index = this.findLetterIndex(letter);
     this.letters.splice(index, 1);
   }
 
   public editLetter(letter: Letter): void {
-    const index = this.letters.findIndex((el: Letter) => el.id ===  letter.id);
+    const index = this.findLetterIndex(letter);
     this.letters.splice(index, 1, letter);
+  }
+
+  private findLetterIndex(letter: Letter): number {
+    return this.letters.findIndex((el: Letter) => el.id === letter.id);
   }
 }
