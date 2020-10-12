@@ -1,5 +1,5 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Letter } from '../shared/interfaces/letter.interface';
 import { CoverLetterService } from '../shared/services/cover-letter.service';
 
@@ -64,12 +64,8 @@ export class ModalComponent implements OnInit {
     }
   }
 
-  private checkIfFormValid(letter: Letter): boolean {
-    this.letterForm.setValue(letter);
-    if (this.letterForm.invalid) {
-      return false;
-    }
-    return true;
+  public onInput(): void {
+    this.notUniqueId = false;
   }
 
   public close(): void {
@@ -78,6 +74,11 @@ export class ModalComponent implements OnInit {
 
   public generateRandomId(): void {
     this.letterForm.patchValue({ id: Math.random().toString(36).substring(2, 15) });
+  }
+
+  private checkIfFormValid(letter: Letter): boolean {
+    this.letterForm.setValue(letter);
+    return this.letterForm.invalid ? false : true;
   }
 
   public get id(): AbstractControl {
