@@ -15,9 +15,12 @@
                         <p>About : {{ letter.about }}</p>
                         <p>Draft : {{ letter.draft }}</p>
                     </div>
-                    <button type="button" class="btn btn-dark mr-3" (click)="letter.isOpen = !letter.isOpen">Close
-                        Details</button>
-                    <button type="button" class="btn btn-warning" (click)="editLetter(letter, i, $event)">Edit</button>
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-dark mr-3" (click)="letter.isOpen = !letter.isOpen">Close
+                            Details</button>
+                        <button type="button" class="btn btn-warning"
+                            (click)="editLetter(letter, i, $event)">Edit</button>
+                    </div>
                 </div>
                 <div class="letters-buttons-wrapper">
                     <button *ngIf="!letter.isOpen" type="button" class="btn btn-info mr-3"
