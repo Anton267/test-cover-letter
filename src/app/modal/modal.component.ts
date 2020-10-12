@@ -15,7 +15,7 @@ export class ModalComponent implements OnInit {
   @Input() private saveEditableIndex: number;
   @Input() private letter: Letter;
   @Output() public closeEvent: EventEmitter<any> = new EventEmitter();
-  @ViewChild('idInp', { static: false }) private idElem: ElementRef<HTMLInputElement>;
+  @ViewChild('idElem', { static: false }) private idElem: ElementRef<HTMLInputElement>;
   public notUniqueId: boolean;
   public letterForm: FormGroup;
 
