@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
-import { delay, filter, map } from 'rxjs/operators'
+import { delay, map } from 'rxjs/operators';
 import { Letter } from '../shared/interfaces/letter.interface';
 import { CoverLetterService } from '../shared/services/cover-letter.service';
 
