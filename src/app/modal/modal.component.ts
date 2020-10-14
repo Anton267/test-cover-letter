@@ -63,11 +63,12 @@ export class ModalComponent implements OnInit {
       draft: this.draft.value,
     };
     this.letterForm.setValue(letter);
-    if (this.letterForm.invalid) {
-      return;
-    }
-    this.isEdit ? this.coverLetterService.editLetter(letter, this.saveEditableIndex) : this.coverLetterService.addLetter(letter);
-    this.close();
+    setTimeout(() => {
+      if (!this.letterForm.invalid) {
+        this.isEdit ? this.coverLetterService.editLetter(letter, this.saveEditableIndex) : this.coverLetterService.addLetter(letter);
+        this.close();
+      }
+    }, 500);
   }
 
   public close(): void {
