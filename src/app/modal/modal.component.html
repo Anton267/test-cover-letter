@@ -10,12 +10,12 @@
             <div class="modal-body">
                 <form [formGroup]="letterForm">
                     <div class="form-item-wrapper mb-4">
-                        <label for="letterFormID">ID&nbsp;</label>
+                        <label for="letterFormID">ID</label>
                         <input type="text" class="form-control" id="letterFormID" formControlName="id">
                         <div *ngIf="!id.valid && (id.dirty || id.touched)"
                             [class.show-error]="!id.valid && (id.dirty || id.touched)">
                             <small [class.show-error]="id.errors?.uniqueId" [class.hide-error]="!id.errors?.uniqueId"
-                                class="form-text form-error-msg">&nbsp;ID should be unique</small>
+                                class="form-text form-error-msg">ID should be unique</small>
                             <small [class.show-error]="id.errors?.required" [class.hide-error]="!id.errors?.required"
                                 class="form-text form-error-msg"> ID is required</small>
                             <small [class.show-error]="id.errors?.pattern" [class.hide-error]="!id.errors?.pattern"
