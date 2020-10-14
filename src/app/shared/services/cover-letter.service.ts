@@ -17,8 +17,7 @@ export class CoverLetterService {
     this.letters.splice(index, 1);
   }
 
-  public editLetter(letter: Letter): void {
-    const index = this.findLetterIndex(letter);
+  public editLetter(letter: Letter, index: number): void {
     this.letters.splice(index, 1, letter);
   }
 

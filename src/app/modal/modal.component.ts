@@ -66,7 +66,7 @@ export class ModalComponent implements OnInit {
     if (this.letterForm.invalid) {
       return;
     }
-    this.isEdit ? this.coverLetterService.editLetter(letter) : this.coverLetterService.addLetter(letter);
+    this.isEdit ? this.coverLetterService.editLetter(letter, this.saveEditableIndex) : this.coverLetterService.addLetter(letter);
     this.close();
   }
 
