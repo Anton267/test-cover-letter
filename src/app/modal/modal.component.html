@@ -10,22 +10,16 @@
             <div class="modal-body">
                 <form [formGroup]="letterForm">
                     <div class="form-item-wrapper mb-4">
-                        <div class="d-flex">
-                            <label for="letterFormID">ID&nbsp;</label>
-                            <span [class.show-error]="id.errors?.uniqueId" [class.hide-error]="!id.errors?.uniqueId"
-                                class="unique-id-message">&nbsp;ID should be
-                                unique</span>
-                        </div>
-                        <div class="form-id-wrapper">
-                            <div class="input-group">
-                                <input type="text" class="form-control" id="letterFormID" formControlName="id">
-                                <button type="button" class="btn btn-info" (click)="generateRandomId()">Random
-                                    Id</button>
-                            </div>
-                            <small *ngIf="!id.valid && (id.dirty || id.touched) && id.errors?.required"
-                                [class.show-error]="id.errors?.required" [class.hide-error]="!id.errors?.required"
-                                class="form-text form-error-msg">
-                                ID is required</small>
+                        <label for="letterFormID">ID&nbsp;</label>
+                        <input type="text" class="form-control" id="letterFormID" formControlName="id">
+                        <div *ngIf="!id.valid && (id.dirty || id.touched)"
+                            [class.show-error]="!id.valid && (id.dirty || id.touched)">
+                            <small [class.show-error]="id.errors?.uniqueId" [class.hide-error]="!id.errors?.uniqueId"
+                                class="form-text form-error-msg">&nbsp;ID should be unique</small>
+                            <small [class.show-error]="id.errors?.required" [class.hide-error]="!id.errors?.required"
+                                class="form-text form-error-msg"> ID is required</small>
+                            <small [class.show-error]="id.errors?.pattern" [class.hide-error]="!id.errors?.pattern"
+                                class="form-text form-error-msg">Id can has only numbers</small>
                         </div>
                     </div>
                     <div class="form-item-wrapper mb-4">

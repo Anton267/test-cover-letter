@@ -1,9 +1,24 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
 import { Letter } from '../shared/interfaces/letter.interface';
 import { CoverLetterService } from '../shared/services/cover-letter.service';
+
+function uniqueId(control: AbstractControl): Observable<{ [key: string]: any }> | null {
+  const id = control.value;
+  return of(id).pipe(
+    delay(500),
+    map(val => {
+      const unique = this.letters.findIndex((el: Letter) => el.id === val);
+      if (unique === -1 || this.saveEditableIndex === unique || val === null) {
+        return null;
+      } else {
+        return { uniqueId: val };
+      }
+    })
+  );
+}
 
 @Component({
   selector: 'app-modal',
@@ -24,28 +39,13 @@ export class ModalComponent implements OnInit {
     private fb: FormBuilder,
   ) {
     this.letterForm = this.fb.group({
-      id: ['', [Validators.required], this.uniqueId],
+      id: ['', [Validators.required, Validators.pattern(/^[0-9]*$/)], uniqueId.bind(this)],
       profession: ['', [Validators.minLength(3), Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)]],
       name: ['', [Validators.minLength(3), Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)]],
       about: ['', [Validators.minLength(3), Validators.required]],
       isOpen: [false],
       draft: [false],
     });
-  }
-
-  private uniqueId: ValidatorFn = (control: AbstractControl): Observable<{ [key: string]: any }> | null => {
-    const id = control.value;
-    return of(id).pipe(
-      delay(500),
-      map(val => {
-        const unique = this.letters.findIndex((el: Letter) => el.id === val);
-        if (unique === -1 || this.saveEditableIndex === unique || val === null) {
-          return null;
-        } else {
-          return { uniqueId: val };
-        }
-      })
-    );
   }
 
   public changeLetterDraft(): void {
@@ -62,16 +62,16 @@ export class ModalComponent implements OnInit {
       isOpen: this.isOpen.value,
       draft: this.draft.value,
     };
+    this.letterForm.setValue(letter);
+    if (this.letterForm.invalid) {
+      return;
+    }
     this.isEdit ? this.coverLetterService.editLetter(letter) : this.coverLetterService.addLetter(letter);
     this.close();
   }
 
   public close(): void {
     this.closeEvent.emit();
-  }
-
-  public generateRandomId(): void {
-    this.letterForm.patchValue({ id: Math.random().toString(36).substring(2, 15) });
   }
 
   public get id(): AbstractControl {
